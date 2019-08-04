@@ -67,6 +67,7 @@ class VideoCell: UICollectionViewCell {
     }()
     
     func setupViews(){
+        
         addSubview(thumbnailImageView)
         addSubview(separatorView)
         addSubview(userProfileImageView)
