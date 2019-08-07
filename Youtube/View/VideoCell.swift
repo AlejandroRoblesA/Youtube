@@ -24,7 +24,7 @@ class BaseCell: UICollectionViewCell{
     }
 }
 
-class VideoCell: UICollectionViewCell {
+class VideoCell: BaseCell {
     
     
     let thumbnailImageView: UIImageView = {
@@ -66,7 +66,7 @@ class VideoCell: UICollectionViewCell {
         return textView
     }()
     
-    func setupViews(){
+    override func setupViews(){
         
         addSubview(thumbnailImageView)
         addSubview(separatorView)
