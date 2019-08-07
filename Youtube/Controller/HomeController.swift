@@ -9,6 +9,18 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var videos: [Video] = {
+        var blankSpaceVideo = Video()
+        blankSpaceVideo.title = "Epica - Simone Simons"
+        blankSpaceVideo.thumbnailImageName = "simoneSimons"
+        
+        var alissa =  Video()
+        alissa.title = "ARCH ENEMY - You Will Know My Name (OFFICIAL VIDEO)"
+        alissa.thumbnailImageName = "alissa"
+        
+        return [alissa, blankSpaceVideo]
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +47,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func setupNavBarButtons(){
+        let searchImage = UIImage (named: "search_icon")?.withRenderingMode(.alwaysOriginal)
+        let searchBarButtonItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+        let moreButton = UIBarButtonItem(image: UIImage(named: "nav_more_icon")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+        navigationItem.rightBarButtonItems = [moreButton, searchBarButtonItem]
+    }
+    
+    @objc func handleSearch(){
+        
+    }
+    
+    @objc func handleMore(){
         
     }
     
@@ -50,11 +73,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return videos.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+        cell.video = videos[indexPath.item]
         
         return cell
     }

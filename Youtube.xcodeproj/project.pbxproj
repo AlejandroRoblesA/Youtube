@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A917F59922FA7967007DF849 /* Video.swift in Sources */ = {isa = PBXBuildFile; fileRef = A917F59822FA7967007DF849 /* Video.swift */; };
 		A94695A022EE917000C900CB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A946959F22EE917000C900CB /* AppDelegate.swift */; };
 		A94695A222EE917000C900CB /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A94695A122EE917000C900CB /* HomeController.swift */; };
 		A94695A522EE917000C900CB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A94695A322EE917000C900CB /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A917F59822FA7967007DF849 /* Video.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Video.swift; sourceTree = "<group>"; };
 		A946959C22EE917000C900CB /* Youtube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Youtube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A946959F22EE917000C900CB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A94695A122EE917000C900CB /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -41,6 +43,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A917F59722FA7946007DF849 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				A917F59822FA7967007DF849 /* Video.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		A946959322EE917000C900CB = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +70,7 @@
 		A946959E22EE917000C900CB /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
+				A917F59722FA7946007DF849 /* Model */,
 				A98AC65B22F3E7D400D660B8 /* View */,
 				A98AC65E22F3E84500D660B8 /* Controller */,
 				A98AC65822F3E73D00D660B8 /* Helpers */,
@@ -169,6 +180,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A94695A222EE917000C900CB /* HomeController.swift in Sources */,
+				A917F59922FA7967007DF849 /* Video.swift in Sources */,
 				A98AC65D22F3E80600D660B8 /* VideoCell.swift in Sources */,
 				A98AC65A22F3E76100D660B8 /* Extensions.swift in Sources */,
 				A94695A022EE917000C900CB /* AppDelegate.swift in Sources */,
