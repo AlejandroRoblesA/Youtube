@@ -35,6 +35,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        fetchVideos()
+        
         navigationItem.title = "Home"
         
         navigationController?.navigationBar.isTranslucent = false
@@ -54,6 +56,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupMenuBar()
         setupNavBarButtons()
+    }
+    
+    func fetchVideos(){
+        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")!
+        let request = URLRequest(url: url)
+        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+            if error != nil{
+                print (error!)
+                return
+            }
+
+            do{
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                print(json)
+            }catch let jsonError{
+                print (jsonError)
+            }
+            
+//            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
+//            print(str!)
+        }).resume()
     }
     
     func setupNavBarButtons(){
