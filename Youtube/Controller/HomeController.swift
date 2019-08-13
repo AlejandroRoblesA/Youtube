@@ -10,28 +10,30 @@ import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var videos: [Video] = {
-        
-        var nitaChannel = Channel()
-        nitaChannel.name = "NitaIsTheBestChannel"
-        nitaChannel.profileImageName = "nita"
-        
-        var simone = Video()
-        simone.title = "Epica - Simone Simons"
-        simone.thumbnailImageName = "simoneSimons"
-        simone.channel = nitaChannel
-        simone.numberOfViews = 3123456789
-        
-        var alissa =  Video()
-        alissa.title = "ARCH ENEMY - You Will Know My Name (OFFICIAL VIDEO)"
-        alissa.thumbnailImageName = "alissa"
-        alissa.channel = nitaChannel
-        alissa.numberOfViews = 3987123464
-        
-        
-        return [alissa, simone]
-    }()
+//    var videos: [Video] = {
+//
+//        var nitaChannel = Channel()
+//        nitaChannel.name = "NitaIsTheBestChannel"
+//        nitaChannel.profileImageName = "nita"
+//
+//        var simone = Video()
+//        simone.title = "Epica - Simone Simons"
+//        simone.thumbnailImageName = "simoneSimons"
+//        simone.channel = nitaChannel
+//        simone.numberOfViews = 3123456789
+//
+//        var alissa =  Video()
+//        alissa.title = "ARCH ENEMY - You Will Know My Name (OFFICIAL VIDEO)"
+//        alissa.thumbnailImageName = "alissa"
+//        alissa.channel = nitaChannel
+//        alissa.numberOfViews = 3987123464
+//
+//
+//        return [alissa, simone]
+//    }()
 
+    var videos: [Video]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,7 +71,20 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
             do{
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print(json)
+                
+                self.videos = [Video]()
+                
+                for dictionary in json as! [[String: AnyObject]]{
+                    
+                    let video = Video()
+                    video.title = dictionary["title"] as? String
+                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
+                    self.videos?.append(video)
+                    
+                }
+                
+                self.collectionView.reloadData()
+                
             }catch let jsonError{
                 print (jsonError)
             }
@@ -106,12 +121,13 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return videos.count
+
+        return videos?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-        cell.video = videos[indexPath.item]
+        cell.video = videos?[indexPath.item]
         
         return cell
     }
