@@ -62,38 +62,13 @@ class VideoCell: BaseCell {
     
     func setupProfileImage(){
         if let profileImageUrl = video?.channel?.profileImageName{
-            let url = URL(string: profileImageUrl)
-            let request = URLRequest(url: url!)
-            URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-                if error != nil{
-                    print (error!)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.userProfileImageView.image = UIImage(data: data!)
-                }
-                
-            }).resume()
-            print (profileImageUrl)
+            userProfileImageView.loadImageUsingUrlString(urlString: profileImageUrl)
         }
-        
     }
     
     func setupThumbnailImage(){
         if let thumbnailImageUrl = video?.thumbnailImageName{
-            let url = URL(string: thumbnailImageUrl)
-            let request = URLRequest(url: url!)
-            URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-                if error != nil{
-                    print (error!)
-                    return
-                }
-                DispatchQueue.main.async {
-                    self.thumbnailImageView.image = UIImage(data: data!)
-                }
-
-            }).resume()
-            print (thumbnailImageUrl)
+            thumbnailImageView.loadImageUsingUrlString(urlString: thumbnailImageUrl)
         }
     }
     
