@@ -32,10 +32,9 @@ class VideoCell: BaseCell {
             
             setupThumbnailImage()
             
-            if let profileImageName = video?.channel?.profileImageName {
-                userProfileImageView.image = UIImage(named: profileImageName)
-                
-            }
+            setupProfileImage()
+            
+            
             if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews{
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
@@ -61,6 +60,25 @@ class VideoCell: BaseCell {
         }
     }
     
+    func setupProfileImage(){
+        if let profileImageUrl = video?.channel?.profileImageName{
+            let url = URL(string: profileImageUrl)
+            let request = URLRequest(url: url!)
+            URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
+                if error != nil{
+                    print (error!)
+                    return
+                }
+                DispatchQueue.main.async {
+                    self.userProfileImageView.image = UIImage(data: data!)
+                }
+                
+            }).resume()
+            print (profileImageUrl)
+        }
+        
+    }
+    
     func setupThumbnailImage(){
         if let thumbnailImageUrl = video?.thumbnailImageName{
             let url = URL(string: thumbnailImageUrl)
@@ -73,11 +91,7 @@ class VideoCell: BaseCell {
                 DispatchQueue.main.async {
                     self.thumbnailImageView.image = UIImage(data: data!)
                 }
-//                dispatch_async(dispatch_get_main_queue(), {
-//                    self.thumbnailImageView.image = UIImage(data: data!)
-//                })
-                
-                
+
             }).resume()
             print (thumbnailImageUrl)
         }
@@ -97,6 +111,7 @@ class VideoCell: BaseCell {
         imageView.image = UIImage(named: "ProfileSimoneSimons")
         imageView.layer.cornerRadius = 22
         imageView.layer.masksToBounds = true
+        imageView.contentMode = .scaleAspectFill
         return imageView
     }()
     
