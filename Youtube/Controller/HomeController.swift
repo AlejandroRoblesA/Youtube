@@ -118,6 +118,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     @objc func handleMore(){
         
+        if let window = UIApplication.shared.keyWindow {
+            let blackView = UIView()
+            blackView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+            window.addSubview(blackView)
+            blackView.frame = window.frame
+            blackView.alpha = 0
+            UIView.animate(withDuration: 0.5) {
+                blackView.alpha = 1
+            }
+        }
+        
     }
     
     let menuBar: MenuBar = {
