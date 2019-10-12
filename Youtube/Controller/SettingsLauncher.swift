@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsLauncher: NSObject {
+class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate {
     
     let blackView = UIView()
     
@@ -19,6 +19,9 @@ class SettingsLauncher: NSObject {
         cv.backgroundColor = .white
         return cv
     }()
+    
+    
+    let cellId = "cellId"
     
     @objc func showSettings(){
         
@@ -51,7 +54,20 @@ class SettingsLauncher: NSObject {
         }
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        return cell
+    }
+    
     override init() {
         super.init()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
     }
 }
