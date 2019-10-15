@@ -16,6 +16,7 @@
 		A98AC65A22F3E76100D660B8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AC65922F3E76100D660B8 /* Extensions.swift */; };
 		A98AC65D22F3E80600D660B8 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A98AC65C22F3E80600D660B8 /* VideoCell.swift */; };
 		A9B212E423518ACD0050777C /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B212E323518ACD0050777C /* SettingCell.swift */; };
+		A9B7AAA9235566E400E6D18F /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B7AAA8235566E400E6D18F /* ApiService.swift */; };
 		A9B9AB9B22F60398007A8298 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9B9AB9A22F60398007A8298 /* MenuBar.swift */; };
 		A9C72F782350369B00DCCE2A /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9C72F772350369B00DCCE2A /* SettingsLauncher.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		A98AC65922F3E76100D660B8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		A98AC65C22F3E80600D660B8 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 		A9B212E323518ACD0050777C /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		A9B7AAA8235566E400E6D18F /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		A9B9AB9A22F60398007A8298 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		A9C72F772350369B00DCCE2A /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +76,7 @@
 		A946959E22EE917000C900CB /* Youtube */ = {
 			isa = PBXGroup;
 			children = (
+				A9B7AAA72355669E00E6D18F /* ApiService */,
 				A917F59722FA7946007DF849 /* Model */,
 				A98AC65B22F3E7D400D660B8 /* View */,
 				A98AC65E22F3E84500D660B8 /* Controller */,
@@ -112,6 +115,14 @@
 				A9C72F772350369B00DCCE2A /* SettingsLauncher.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		A9B7AAA72355669E00E6D18F /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				A9B7AAA8235566E400E6D18F /* ApiService.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +201,7 @@
 				A9B212E423518ACD0050777C /* SettingCell.swift in Sources */,
 				A98AC65D22F3E80600D660B8 /* VideoCell.swift in Sources */,
 				A9C72F782350369B00DCCE2A /* SettingsLauncher.swift in Sources */,
+				A9B7AAA9235566E400E6D18F /* ApiService.swift in Sources */,
 				A98AC65A22F3E76100D660B8 /* Extensions.swift in Sources */,
 				A94695A022EE917000C900CB /* AppDelegate.swift in Sources */,
 				A9B9AB9B22F60398007A8298 /* MenuBar.swift in Sources */,

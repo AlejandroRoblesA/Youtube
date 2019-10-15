@@ -9,28 +9,6 @@
 import UIKit
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    
-//    var videos: [Video] = {
-//
-//        var nitaChannel = Channel()
-//        nitaChannel.name = "NitaIsTheBestChannel"
-//        nitaChannel.profileImageName = "nita"
-//
-//        var simone = Video()
-//        simone.title = "Epica - Simone Simons"
-//        simone.thumbnailImageName = "simoneSimons"
-//        simone.channel = nitaChannel
-//        simone.numberOfViews = 3123456789
-//
-//        var alissa =  Video()
-//        alissa.title = "ARCH ENEMY - You Will Know My Name (OFFICIAL VIDEO)"
-//        alissa.thumbnailImageName = "alissa"
-//        alissa.channel = nitaChannel
-//        alissa.numberOfViews = 3987123464
-//
-//
-//        return [alissa, simone]
-//    }()
 
     var videos: [Video]?
     
@@ -59,48 +37,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func fetchVideos(){
-        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")!
-        let request = URLRequest(url: url)
-        URLSession.shared.dataTask(with: request, completionHandler: { (data, response, error) in
-            if error != nil{
-                print (error!)
-                return
-            }
-
-            do{
-                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                
-                self.videos = [Video]()
-                
-                for dictionary in json as! [[String: AnyObject]]{
-                    
-                    let video = Video()
-                    video.title = dictionary["title"] as? String
-                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
-                    
-                    let channelDictionary = dictionary["channel"] as! [String: AnyObject]
-                    
-                    let channel = Channel()
-                    channel.profileImageName = channelDictionary["profile_image_name"] as? String
-                    channel.name = channelDictionary["name"] as? String
-                    
-                    video.channel = channel
-                    
-                    self.videos?.append(video)
-                    
-                }
-                
-                DispatchQueue.main.async {
-                    self.collectionView.reloadData()
-                }
-                
-            }catch let jsonError{
-                print (jsonError)
-            }
-            
-//            let str = NSString(data: data!, encoding: String.Encoding.utf8.rawValue)
-//            print(str!)
-        }).resume()
+        ApiService.sharedInstance.fetchVideos { (videos: [Video]) in
+            self.videos = videos
+            self.collectionView?.reloadData()
+        }
     }
     
     func setupNavBarButtons(){
