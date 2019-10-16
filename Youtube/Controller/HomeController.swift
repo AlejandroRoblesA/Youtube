@@ -65,6 +65,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func scrollToMenuIndex(menuIndex: Int){
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
+        
+        setTitleForIndex(index: menuIndex)
+    }
+    
+    private func setTitleForIndex(index: Int){
+        if let titleLabel = navigationItem.titleView as? UILabel{
+            titleLabel.text = "  \(titles[index])"
+        }
     }
     
     lazy var settingsLauncher: SettingsLauncher = {
@@ -119,9 +127,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
         
-        if let titleLabel = navigationItem.titleView as? UILabel{
-            titleLabel.text = "  \(titles[Int(index)])" 
-        }
+        setTitleForIndex(index: Int(index))
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
