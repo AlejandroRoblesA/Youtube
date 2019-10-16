@@ -36,6 +36,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout{
             flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
         }
         
         collectionView.backgroundColor = .white
@@ -45,6 +46,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
         collectionView.scrollIndicatorInsets = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
+        
+        collectionView.isPagingEnabled = true
     }
     
     func fetchVideos(){
