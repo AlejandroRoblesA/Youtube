@@ -13,6 +13,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let cellId = "cellId"
     
+    let titles = ["Home", "Trending", "Subscription", "Account"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,8 +43,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView.backgroundColor = .white
         
-//        collectionView.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView.contentInset = UIEdgeInsets(top: 50, left: 0, bottom: 0, right: 0)
@@ -118,6 +118,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let index = targetContentOffset.pointee.x / view.frame.width
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredHorizontally)
+        
+        if let titleLabel = navigationItem.titleView as? UILabel{
+            titleLabel.text = "  \(titles[Int(index)])" 
+        }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -131,7 +135,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.height)
+        return CGSize(width: view.frame.width, height: view.frame.height - 50)
     }
 
 }
