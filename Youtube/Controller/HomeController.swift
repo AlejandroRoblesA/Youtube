@@ -65,7 +65,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     @objc func handleSearch(){
-        
+        scrollToMenuIndex(menuIndex: 2)
+    }
+    
+    func scrollToMenuIndex(menuIndex: Int){
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+        collectionView.scrollToItem(at: indexPath, at: .right, animated: true)
     }
     
     lazy var settingsLauncher: SettingsLauncher = {
@@ -87,8 +92,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
     
-    let menuBar: MenuBar = {
+    lazy var menuBar: MenuBar = {
         let mb = MenuBar()
+        mb.homeController = self
         return mb
     }()
     
@@ -110,13 +116,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x / 4
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
-        cell.backgroundColor = .black
+        let colors: [UIColor] = [.green, .blue, .purple, .systemPink]
+        cell.backgroundColor = colors[indexPath.item]
         return cell
     }
     
