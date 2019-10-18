@@ -11,26 +11,21 @@ import UIKit
 class ApiService: NSObject {
 
     static let sharedInstance = ApiService()
+    let baseUrl = "https://s3-us-west-2.amazonaws.com/youtubeassets"
     
     func fetchVideos(completion: @escaping ([Video])-> ()){
         
-        fetchFeedForUrlString(urlString: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json") { (videos) in
-            completion(videos)
-        }
+        fetchFeedForUrlString(urlString: "\(baseUrl)/home.json", completion: completion)
     }
     
     func fetchTrendingFeed(completion: @escaping ([Video])-> ()){
         
-        fetchFeedForUrlString(urlString: "https://s3-us-west-2.amazonaws.com/youtubeassets/trending.json") { (videos) in
-            completion(videos)
-        }
+        fetchFeedForUrlString(urlString: "\(baseUrl)/trending.json", completion: completion)
     }
     
     func fetchSubscriptionFeed(completion: @escaping ([Video])-> ()){
         
-        fetchFeedForUrlString(urlString: "https://s3-us-west-2.amazonaws.com/youtubeassets/subscriptions.json") { (videos) in
-            completion(videos)
-        }
+        fetchFeedForUrlString(urlString: "\(baseUrl)/subscriptions.json", completion: completion)
     }
     
     func fetchFeedForUrlString(urlString: String, completion: @escaping ([Video])->()){
