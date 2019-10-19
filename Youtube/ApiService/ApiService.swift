@@ -45,19 +45,8 @@ class ApiService: NSObject {
                 
                 for dictionary in json as! [[String: AnyObject]]{
                     
-                    let video = Video()
-                    //This names has to be the same named as the JSON content to use the method, setValuesForKeys
-                    video.setValuesForKeys(dictionary)
-                    let channelDictionary = dictionary["channel"] as! [String: AnyObject]
-                    
-                    let channel = Channel()
-                    channel.profileImageName = channelDictionary["profile_image_name"] as? String
-                    channel.name = channelDictionary["name"] as? String
-                    
-                    video.channel = channel
-                    
+                    let video = Video(dictionary: dictionary)
                     videos.append(video)
-                    
                 }
                 
                 DispatchQueue.main.async {
