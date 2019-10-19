@@ -46,9 +46,8 @@ class ApiService: NSObject {
                 for dictionary in json as! [[String: AnyObject]]{
                     
                     let video = Video()
-                    video.title = dictionary["title"] as? String
-                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
-                    video.numberOfViews = dictionary["number_of_views"] as? NSNumber
+                    //This names has to be the same named as the JSON content to use the method, setValuesForKeys
+                    video.setValuesForKeys(dictionary)
                     let channelDictionary = dictionary["channel"] as! [String: AnyObject]
                     
                     let channel = Channel()
