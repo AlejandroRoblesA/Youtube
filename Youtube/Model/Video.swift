@@ -8,7 +8,15 @@
 
 import UIKit
 
-class Video: NSObject {
+class SafeJSONObject: NSObject{
+    override func setValue(_ value: Any?, forKey key: String) {
+        if self.responds(to: NSSelectorFromString(key)) {
+            super.setValue(value, forKey: key)
+        }
+    }
+}
+
+class Video: SafeJSONObject {
     
     //This names has to be the same named as the JSON content to use the method, setValuesForKeys
     //And also for it's works correctly has to set @objc at the beginning
@@ -38,7 +46,7 @@ class Video: NSObject {
     }
 }
 
-class Channel: NSObject {
+class Channel: SafeJSONObject {
     @objc var name: String?
     @objc var profile_image_name: String?
 }
