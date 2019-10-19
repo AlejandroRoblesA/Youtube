@@ -39,7 +39,7 @@ class VideoCell: BaseCell {
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
                 
-                let subtitleText = "\(channelName) · \(String(describing: numberFormatter.string(from: numberOfViews))) · 2 year ago"
+                let subtitleText = "\(channelName) · \(String(describing: numberFormatter.string(from: numberOfViews)!)) · 2 year ago"
                 subtitleTextView.text = subtitleText
             }
             
