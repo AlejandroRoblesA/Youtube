@@ -8,6 +8,19 @@
 
 import UIKit
 
+class VideoPlayerView: UIView{
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        backgroundColor = .black
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+
 class VideoLauncher: NSObject{
     
     func showVideoPlayer(){
@@ -17,6 +30,12 @@ class VideoLauncher: NSObject{
             let view = UIView(frame: keyWindow.frame)
             view.backgroundColor = .white
             view.frame = CGRect(x: keyWindow.frame.width - 10, y: keyWindow.frame.height - 10, width: 10, height: 10)
+            
+            //16 * 9 is the aspect ratio of all HD videos
+            let height = keyWindow.frame.width * 9 / 16
+            let videoPlayerFrame = CGRect(x: 0, y: 0, width: keyWindow.frame.width, height: height)
+            let videoPlayerView = VideoPlayerView(frame: videoPlayerFrame)
+            view.addSubview(videoPlayerView)
             
             keyWindow.addSubview(view)
             
