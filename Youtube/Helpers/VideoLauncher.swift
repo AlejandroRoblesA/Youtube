@@ -7,12 +7,27 @@
 //
 
 import UIKit
+import AVFoundation
 
 class VideoPlayerView: UIView{
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         backgroundColor = .black
+        
+        let urlString = "https://firebasestorage.googleapis.com/v0/b/chat-11c7d.appspot.com/o/someFileName.mov?alt=media&token=0f3d5579-7dd8-47d9-ac68-0d1724d82c6d"
+        
+        if let url = URL(string: urlString){
+            let player = AVPlayer(url: url)
+            
+            let playerLayer = AVPlayerLayer(player: player)
+            self.layer.addSublayer(playerLayer)
+            playerLayer.frame = self.frame
+            
+            player.play()
+        }
+        
+        
     }
     
     required init?(coder: NSCoder) {
@@ -42,7 +57,7 @@ class VideoLauncher: NSObject{
             UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
                 view.frame = keyWindow.frame
             }) { (completedAnimation) in
-                //some code
+                UIApplication.shared.isStatusBarHidden = true
             }
         }
     }
