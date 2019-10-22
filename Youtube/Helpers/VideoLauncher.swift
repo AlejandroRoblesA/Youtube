@@ -20,7 +20,7 @@ class VideoPlayerView: UIView{
     
     let controlsContainerView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.backgroundColor = UIColor(white: 0, alpha: 1)
         return view
     }()
     
@@ -52,6 +52,15 @@ class VideoPlayerView: UIView{
             playerLayer.frame = self.frame
             
             player.play()
+            
+            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+        }
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if (keyPath == "currentItem.loadedTimeRanges"){
+            activityIndicatorView.stopAnimating()
+            controlsContainerView.backgroundColor = .clear
         }
     }
     
