@@ -11,12 +11,28 @@ import AVFoundation
 
 class VideoPlayerView: UIView{
     
+    var player: AVPlayer?
+    
     let activityIndicatorView: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         indicator.startAnimating()
         return indicator
     }()
+    
+    lazy var pauseButton: UIButton = {
+        let button = UIButton(type: UIButton.ButtonType.system)
+        let image = UIImage(named: "pause")
+        button.setImage(image, for: .normal)
+        button.tintColor = .white
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handlePause), for: .touchUpInside)
+        return button
+    }()
+    
+    @objc func handlePause(){
+        player?.pause()
+    }
     
     let controlsContainerView: UIView = {
         let view = UIView()
@@ -36,6 +52,13 @@ class VideoPlayerView: UIView{
         activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
+        controlsContainerView.addSubview(pauseButton)
+        
+        pauseButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        pauseButton.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        pauseButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        pauseButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         backgroundColor = .black
         
         
@@ -45,15 +68,16 @@ class VideoPlayerView: UIView{
         let urlString = "https://firebasestorage.googleapis.com/v0/b/chat-11c7d.appspot.com/o/someFileName.mov?alt=media&token=0f3d5579-7dd8-47d9-ac68-0d1724d82c6d"
         
         if let url = URL(string: urlString){
-            let player = AVPlayer(url: url)
+            
+            player = AVPlayer(url: url)
             
             let playerLayer = AVPlayerLayer(player: player)
             self.layer.addSublayer(playerLayer)
             playerLayer.frame = self.frame
             
-            player.play()
+            player?.play()
             
-            player.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
         }
     }
     
