@@ -10,11 +10,38 @@ import UIKit
 import AVFoundation
 
 class VideoPlayerView: UIView{
+    
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        indicator.startAnimating()
+        return indicator
+    }()
+    
+    let controlsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        return view
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        setupPlayerView()
+        
+        controlsContainerView.frame = frame
+        addSubview(controlsContainerView)
+        controlsContainerView.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        activityIndicatorView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
         backgroundColor = .black
         
+        
+    }
+    
+    private func setupPlayerView(){
         let urlString = "https://firebasestorage.googleapis.com/v0/b/chat-11c7d.appspot.com/o/someFileName.mov?alt=media&token=0f3d5579-7dd8-47d9-ac68-0d1724d82c6d"
         
         if let url = URL(string: urlString){
@@ -26,15 +53,12 @@ class VideoPlayerView: UIView{
             
             player.play()
         }
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
-
 
 class VideoLauncher: NSObject{
     
