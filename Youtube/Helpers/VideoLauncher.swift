@@ -136,6 +136,13 @@ class VideoPlayerView: UIView{
             controlsContainerView.backgroundColor = .clear
             pausePlayButton.isHidden = false
             isPlaying = true
+            
+            if let duration = player?.currentItem?.duration{
+                let seconds = CMTimeGetSeconds(duration)
+                let minutsText = String(format: "%02d", Int(seconds)/60)
+                let secondsText = Int(seconds) % 60
+                videoLenghtLabel.text = "\(minutsText):\(secondsText)"
+            }
         }
     }
     
