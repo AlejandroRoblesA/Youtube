@@ -43,8 +43,6 @@ class VideoPlayerView: UIView{
             player?.play()
             pausePlayButton.setImage(UIImage(named: "pause"), for: .normal)
         }
-        
-        
         isPlaying = !isPlaying
     }
     
@@ -71,8 +69,23 @@ class VideoPlayerView: UIView{
         slider.minimumTrackTintColor = .red
         slider.maximumTrackTintColor = .white
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
+        slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)
         return slider
     }()
+    
+    @objc func handleSliderChange(){
+        print(videoSlider.value)
+        
+        if let duration = player?.currentItem?.duration{
+            
+            let totalSeconds = CMTimeGetSeconds(duration)
+            let value = Float64(videoSlider.value) * totalSeconds
+            let seekTime = CMTime(value: Int64(value), timescale: 1)
+            player?.seek(to: seekTime, completionHandler: { (completedSeek) in
+                //
+            })
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
