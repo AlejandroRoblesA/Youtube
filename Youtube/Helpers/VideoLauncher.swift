@@ -65,6 +65,15 @@ class VideoPlayerView: UIView{
         return label
     }()
     
+    let videoSlider: UISlider = {
+        let slider = UISlider()
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        slider.minimumTrackTintColor = .red
+        slider.maximumTrackTintColor = .white
+        slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
+        return slider
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -90,6 +99,13 @@ class VideoPlayerView: UIView{
         videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         videoLenghtLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
         videoLenghtLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        controlsContainerView.addSubview(videoSlider)
+        
+        videoSlider.rightAnchor.constraint(equalTo: videoLenghtLabel.leftAnchor).isActive = true
+        videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         
         backgroundColor = .black
