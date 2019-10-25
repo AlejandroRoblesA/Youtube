@@ -170,6 +170,11 @@ class VideoPlayerView: UIView{
                 let minutsString = String(format: "%02d", Int(seconds/60))
                 let secondsString = String(format: "%02", Int(seconds.truncatingRemainder(dividingBy: 60)))
                 self.currentTimeLabel.text = "\(minutsString):\(secondsString)"
+                
+                if let duration = self.player?.currentItem?.duration{
+                    let durationSeconds = CMTimeGetSeconds(duration)
+                    self.videoSlider.value = Float(seconds / durationSeconds)
+                }
             })
         }
     }
