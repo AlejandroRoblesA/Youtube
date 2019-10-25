@@ -41,7 +41,7 @@ class CustomImageView: UIImageView{
         
         image = nil
         
-        if let imageFromCache = imageCache.object(forKey: "urlString"){
+        if let imageFromCache = imageCache.object(forKey: urlString as NSString){
             self.image = imageFromCache
             return
         }
@@ -60,7 +60,7 @@ class CustomImageView: UIImageView{
                     
                 }
                 
-                imageCache.setObject(imageToCache!, forKey: "urlString")
+                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
                 
             }
             
