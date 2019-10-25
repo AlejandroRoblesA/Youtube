@@ -100,6 +100,7 @@ class VideoPlayerView: UIView{
         super.init(frame: frame)
         
         setupPlayerView()
+        setupGradientLayer()
         
         controlsContainerView.frame = frame
         addSubview(controlsContainerView)
@@ -138,6 +139,14 @@ class VideoPlayerView: UIView{
         
         
         backgroundColor = .black
+    }
+    
+    private func setupGradientLayer(){
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.7, 1.2]
+        controlsContainerView.layer.addSublayer(gradientLayer)
     }
     
     private func setupPlayerView(){
