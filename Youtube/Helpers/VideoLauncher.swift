@@ -163,6 +163,14 @@ class VideoPlayerView: UIView{
             player?.play()
             
             player?.addObserver(self, forKeyPath: "currentItem.loadedTimeRanges", options: .new, context: nil)
+            
+            let interval = CMTime(value: 1, timescale: 2)
+            player?.addPeriodicTimeObserver(forInterval: interval, queue: DispatchQueue.main, using: { (progressTime) in
+                let seconds = CMTimeGetSeconds(progressTime)
+                let minutsString = String(format: "%02d", Int(seconds/60))
+                let secondsString = String(format: "%02", Int(seconds.truncatingRemainder(dividingBy: 60)))
+                self.currentTimeLabel.text = "\(minutsString):\(secondsString)"
+            })
         }
     }
     
