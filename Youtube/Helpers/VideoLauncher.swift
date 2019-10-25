@@ -57,8 +57,17 @@ class VideoPlayerView: UIView{
         let label = UILabel()
         label.text = "00:00"
         label.textColor = .white
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.textAlignment = .right
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    let currentTimeLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.textColor = .white
+        label.font = UIFont.boldSystemFont(ofSize: 13)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -109,21 +118,26 @@ class VideoPlayerView: UIView{
         controlsContainerView.addSubview(videoLenghtLabel)
         
         videoLenghtLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -8).isActive = true
-        videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoLenghtLabel.widthAnchor.constraint(equalToConstant: 60).isActive = true
+        videoLenghtLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        videoLenghtLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
         videoLenghtLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        controlsContainerView.addSubview(currentTimeLabel)
+        
+        currentTimeLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+        currentTimeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -2).isActive = true
+        currentTimeLabel.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        currentTimeLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
         
         controlsContainerView.addSubview(videoSlider)
         
         videoSlider.rightAnchor.constraint(equalTo: videoLenghtLabel.leftAnchor).isActive = true
         videoSlider.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        videoSlider.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        videoSlider.leftAnchor.constraint(equalTo: currentTimeLabel.rightAnchor).isActive = true
         videoSlider.heightAnchor.constraint(equalToConstant: 30).isActive = true
         
         
         backgroundColor = .black
-        
-        
     }
     
     private func setupPlayerView(){
